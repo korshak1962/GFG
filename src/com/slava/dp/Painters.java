@@ -71,7 +71,7 @@ public class Painters {
         int b=a++;
         int c=++b;
         System.out.println(" "+a+" "+b+" "+c);
-int aa=1<<2;
+int aa=1<<1;
         System.out.println(" "+a);
         char z=0x20;
         int zz=1;

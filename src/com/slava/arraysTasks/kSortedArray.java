@@ -3,6 +3,7 @@ package com.slava.arraysTasks;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 //https://practice.geeksforgeeks.org/problems/k-sorted-array1610/1
@@ -12,6 +13,7 @@ public class kSortedArray {
     public void testYes() {
         int[] input = {3, 2, 1, 5, 6, 4};
         Assert.assertEquals("Yes", isKSortedArray(input, 6, 2));
+        input = Arrays.copyOf(input, 2);
     }
 
     static String isKSortedArray(int arr[], int n, int k) {

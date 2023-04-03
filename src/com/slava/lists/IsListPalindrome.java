@@ -8,7 +8,7 @@ import java.util.LinkedList;
 //https://practice.geeksforgeeks.org/problems/check-if-linked-list-is-pallindrome/1/?problemType=functional&page=1&sortBy=submissions&query=problemTypefunctionalpage1sortBysubmissions#
 public class IsListPalindrome {
 
-    class Node
+    static class Node
     {
         int data;
         Node next;

@@ -2,21 +2,18 @@ package com.slava.amazon;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class hierachyTree {
 
     @Test
     public void test() {
         List<Node> nodes = new ArrayList<>();
-        nodes.add(new Node(null, "p1"));
-        nodes.add(new Node("p1", "ch1"));
-        nodes.add(new Node("ch1", "ch11"));
-        nodes.add(new Node("ch1", "ch12"));
-        nodes.add(new Node("ch11", "ch112"));
+        nodes.add(new Node(null, "lev1"));
+        nodes.add(new Node("lev1", "lev2"));
+        nodes.add(new Node("lev2", "lev3"));
+        nodes.add(new Node("lev2", "lev3_1"));
+        nodes.add(new Node("lev3", "lev4"));
 
         nodes.add(new Node(null, "p2"));
         nodes.add(new Node("p2", "ch2"));
@@ -50,17 +47,20 @@ public class hierachyTree {
                 return childs;
             });
         }
-        printHierachyR(parentToChilds.get(PARENT));
+        List<String> printStack = new LinkedList<>();
+        printStack.add(PARENT);
+        printHierachyR(parentToChilds.get(PARENT),printStack);
     }
 
-    private void printHierachyR(List<String> childs) {
+    private void printHierachyR(List<String> childs,List<String> printStack) {
         if (childs == null) {
-            System.out.println("===");  // print full stack instead
+            System.out.println(printStack);  // print full stack instead
             return;
         }
         for (String parent : childs) {
-            System.out.println(parent);
-            printHierachyR(parentToChilds.get(parent));
+            printStack.add(parent);
+            printHierachyR(parentToChilds.get(parent),printStack);
+            printStack.remove(parent);
         }
     }
 }

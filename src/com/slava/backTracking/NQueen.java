@@ -59,12 +59,12 @@ public class NQueen {
     }
 
     static class ChesBoard {
-        int nQueen;
+        int size;
         int position[][];
 
-        public ChesBoard(int nQueen) {
-            this.nQueen = nQueen;
-            position = new int[nQueen][nQueen];
+        public ChesBoard(int size) {
+            this.size = size;
+            position = new int[size][size];
         }
 
         public boolean isPositionAllowed(final int column, final int row) {
@@ -139,7 +139,7 @@ public class NQueen {
         }
 
         private boolean isLegalPosition(int iColumn, int iRow) {
-            return iColumn >= 0 && iColumn < nQueen && iRow >= 0 && iRow < nQueen;
+            return iColumn >= 0 && iColumn < size && iRow >= 0 && iRow < size;
         }
 
         public void fillPosition(int column, int row, int val) {

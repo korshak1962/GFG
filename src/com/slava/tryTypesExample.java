@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.lang.reflect.Type;
 import java.util.LinkedList;
 
-public class TryT_example implements TryT<LinkedList> {
+public class tryTypesExample implements TryType<LinkedList> {
 
     @SuppressWarnings("unchecked")
     public String getType() {

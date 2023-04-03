@@ -1,4 +1,4 @@
-package com.slava.bfs;
+package com.slava.tree;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -6,8 +6,7 @@ import org.junit.Test;
 import java.util.*;
 
 //https://practice.geeksforgeeks.org/problems/d1afdbd3d49e4e7e6f9d738606cd592f63e6b0f0/1/?page=1&difficulty[]=2&category[]=Tree&sortBy=submissions
-public class CovidKit {
-
+public class CoronaVaccine {
 
     @Test
     // 1 2 3 N N N 4 N 5 N 6
@@ -58,7 +57,35 @@ public class CovidKit {
         }
     }
 
+    static int vacNum = 0;
+
     public static int supplyVaccine(Node root) {
+        vacNum = 0;
+        if (isVaccinated(root) == 0) vacNum++;
+        return vacNum;
+    }
+
+    static int isVaccinated(Node root) {
+        if (root.left == null && root.right == null) {
+            return 0;
+        }
+        int left = 1;
+        int right = 1;
+        if (root.left != null) {
+            left = isVaccinated(root.left);
+        }
+        if (root.right != null) {
+            right = isVaccinated(root.right);
+        }
+        if (Integer.min(left, right) == 0) {
+            vacNum++;
+            return 2;
+        }
+        return Integer.max(left, right) - 1;
+    }
+
+
+    public static int supplyVaccine1(Node root) {
         LinkedList<Integer> layersSizes = new LinkedList<>();
         List<Integer> numOfOrphans = new ArrayList<>();
         List<Node> layer1 = new ArrayList<>();
