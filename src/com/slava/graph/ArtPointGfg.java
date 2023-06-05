@@ -3,6 +3,8 @@ package com.slava.graph;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+//http://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/
+//http://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/
 public class ArtPointGfg {
 
     private int V;   // No. of vertices

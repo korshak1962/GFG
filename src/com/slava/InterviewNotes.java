@@ -9,10 +9,24 @@ import java.util.stream.IntStream;
 public class InterviewNotes {
 
     @Test
+    public void testString() {
+        String str = "qwerty";
+        final char[] chars = str.toCharArray();
+        for (int i = 0; i < str.length(); i++) {
+            char ch = chars[i];
+        }
+        StringBuilder builder = new StringBuilder(str).reverse();
+    }
+
+    @Test
     public void testMap() {
         Map<Integer, Integer> intToInt = new TreeMap<>();
-        intToInt.computeIfAbsent(1, (key) -> 3 + 1);
+        Integer maxKey = -1;
+        for (Map.Entry<Integer, Integer> entry : intToInt.entrySet()) {
+            if (entry.getValue() > 2) maxKey = Integer.max(entry.getKey(), maxKey);
+        }
         intToInt.computeIfPresent(1, (k, v) -> v + 4);
+        intToInt.computeIfAbsent(1, (key) -> 3 + 1);
         final NavigableMap<Integer, Integer> intToIntNavigable = (NavigableMap<Integer, Integer>) intToInt;
         int r = intToIntNavigable.firstEntry().getValue();
         r = intToIntNavigable.floorEntry(1).getValue();
