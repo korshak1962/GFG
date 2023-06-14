@@ -5,7 +5,7 @@ import org.junit.Test;
 
 //https://practice.geeksforgeeks.org/problems/check-for-bst/1/?problemType=functional&page=1&sortBy=submissions&query=problemTypefunctionalpage1sortBysubmissions
 public class CheckIsBST {
-    class Node {
+ public static  class Node {
         int data;
         Node left;
         Node right;
