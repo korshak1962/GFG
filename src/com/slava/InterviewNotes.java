@@ -24,9 +24,12 @@ public class InterviewNotes {
         Integer maxKey = -1;
         for (Map.Entry<Integer, Integer> entry : intToInt.entrySet()) {
             if (entry.getValue() > 2) maxKey = Integer.max(entry.getKey(), maxKey);
+           // entry.setValue()
         }
         intToInt.computeIfPresent(1, (k, v) -> v + 4);
         intToInt.computeIfAbsent(1, (key) -> 3 + 1);
+        intToInt.entrySet().iterator().next().getValue();
+        //intToInt.keySet().iterator()
         final NavigableMap<Integer, Integer> intToIntNavigable = (NavigableMap<Integer, Integer>) intToInt;
         int r = intToIntNavigable.firstEntry().getValue();
         r = intToIntNavigable.floorEntry(1).getValue();

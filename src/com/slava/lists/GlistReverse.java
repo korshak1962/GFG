@@ -1,6 +1,60 @@
 package com.slava.lists;
 
+import org.junit.Test;
+
 public class GlistReverse {
+
+    // write method to reverse a linked list using RemoveLoopInList.Node
+    public static void reverse(RemoveLoopInList.Node head) {
+        RemoveLoopInList.Node previous = head;
+        RemoveLoopInList.Node next;
+        while (head.next!= null) {
+            next = head.next;
+            head.next = previous;
+            previous = head;
+            head = next;
+        }
+        head.next = previous;
+    }
+    // write unit test for GlistReverse.reverse method
+    @Test
+    public void test1() {
+        // 1 -> 3 -> 4->3
+        RemoveLoopInList.Node first = new RemoveLoopInList.Node();
+        first.data = 1;
+        RemoveLoopInList.Node second = new RemoveLoopInList.Node();
+        first.next = second;
+        second.data = 3;
+        RemoveLoopInList.Node third = new RemoveLoopInList.Node();
+        second.next = third;
+        third.data = 4;
+        third.next = third;
+        // the below code fragment can be found in:
+        // GFG\src\com\slava\lists\ListReversingAndReorder.java
+        RemoveLoopInList.Node head = new RemoveLoopInList.Node(2);
+        head.next = new RemoveLoopInList.Node(4);
+        head.next.next = new RemoveLoopInList.Node(6);
+    }
+    @Test
+    public void test() {
+        // 1 -> 3 -> 4->3
+        RemoveLoopInList.Node first = new RemoveLoopInList.Node();
+        first.data = 1;
+        RemoveLoopInList.Node second = new RemoveLoopInList.Node();
+        first.next = second;
+        second.data = 3;
+        RemoveLoopInList.Node third = new RemoveLoopInList.Node();
+        second.next = third;
+        third.data = 4;
+        third.next = third;
+        // the below code fragment can be found in:
+        // GFG\src\com\slava\lists\ListReversingAndReorder.java
+        RemoveLoopInList.Node head = new RemoveLoopInList.Node(2);
+        head.next = new RemoveLoopInList.Node(4);
+        head.next.next = new RemoveLoopInList.Node(6);
+    }
+
+
     /*
     1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 ->8
 

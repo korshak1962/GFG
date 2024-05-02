@@ -5,9 +5,15 @@ import org.junit.Test;
 //https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1/?category[]=two-pointer-algorithm&page=1&query=category[]two-pointer-algorithmpage1
 public class RemoveLoopInList {
 
-    class Node {
+  public static  class Node {
         int data;
         Node next;
+
+        public  Node(){}
+        public Node(int data) {
+            this.data = data;
+            next = null;
+        }
     }
 
     @Test

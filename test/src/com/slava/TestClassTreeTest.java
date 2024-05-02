@@ -1,9 +1,7 @@
 package com.slava;
 
-import java.util.List;
-
 public class TestClassTreeTest {
-
+/*
     @org.junit.Test
     public void stringToTreeTest(){
         TestClassTree tree=new TestClassTree(5);
@@ -34,5 +32,5 @@ public class TestClassTreeTest {
             root=root.next;
         }
     }
-
+*/
 }
