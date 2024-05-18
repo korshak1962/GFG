@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class InterviewNotes {
 
@@ -24,7 +25,7 @@ public class InterviewNotes {
         Integer maxKey = -1;
         for (Map.Entry<Integer, Integer> entry : intToInt.entrySet()) {
             if (entry.getValue() > 2) maxKey = Integer.max(entry.getKey(), maxKey);
-           // entry.setValue()
+            // entry.setValue()
         }
         intToInt.computeIfPresent(1, (k, v) -> v + 4);
         intToInt.computeIfAbsent(1, (key) -> 3 + 1);
@@ -174,6 +175,14 @@ public class InterviewNotes {
 
         boolean res = IntStream.range(1, 2).allMatch(e -> e > 0);
         System.out.println(res);
+        int[] numbers = {1, 2, 3, 4, 5};
+
+// Using Arrays.stream() for efficient operations on primitives
+        IntStream numberStream1 = Arrays.stream(numbers);
+        numberStream1.average().ifPresent(avg -> System.out.println("Average: " + avg)); // Calculates average efficiently
+
+// Using Stream.of() treats the array as a single element
+        Stream<int[]> numberStream2 = Stream.of(numbers);
     }
 
 
