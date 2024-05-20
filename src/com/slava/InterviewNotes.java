@@ -161,6 +161,7 @@ public class InterviewNotes {
         inters1.add(new Interval(1, 2));
         inters1.add(new Interval(0, 2));
         Set<Integer> starts = inters1.stream().sorted().map(a -> a.start).collect(Collectors.toSet());
+        starts.contains(new Interval(1, 2));
         System.out.println(starts);
 
         List<List<Interval>> listList = new ArrayList<>();
