@@ -6,9 +6,41 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 //https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 public class FindStartIndex {
+
+    private static <T> int getMaxInd(List<? extends Comparable<? super T>> numsWithDupSorted, T key) {
+        int indToInsert = Collections.binarySearch(numsWithDupSorted, key);
+        while (indToInsert < numsWithDupSorted.size() - 1 && numsWithDupSorted.get(indToInsert + 1).equals(key)) {
+            List<? extends Comparable<? super T>> subList = numsWithDupSorted.subList(indToInsert + 1, numsWithDupSorted.size());
+            indToInsert += Collections.binarySearch(subList, key) + 1;
+        }
+        return indToInsert;
+    }
+
+    private static <T> int getMinInd(List<? extends Comparable<? super T>> numsWithDupSorted, T key) {
+        int curInd = Collections.binarySearch(numsWithDupSorted, key);
+        while (curInd > 0 && numsWithDupSorted.get(curInd - 1).equals(key)) {
+            List<? extends Comparable<? super T>> subList = numsWithDupSorted.subList(0, curInd);
+            curInd = Collections.binarySearch(subList, key);
+        }
+        return curInd;
+    }
+
+    @Test
+    public void testDubSearchMax() {
+        List<Integer> intList = List.of(1, 1, 2, 2, 3, 3, 4, 4, 4);
+        int res = getMaxInd(intList, 4);
+        System.out.println(res);
+    }
+    @Test
+    public void testDubSearchMin() {
+        List<Integer> intList = List.of(1, 1, 2, 2, 3, 3, 4, 4, 4);
+        int res = getMinInd(intList, 4);
+        System.out.println(res);
+    }
 
 
     int findQnty(int[] array, int target) {

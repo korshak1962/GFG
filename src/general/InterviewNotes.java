@@ -1,4 +1,4 @@
-package com.slava;
+package general;
 
 import org.junit.Test;
 
@@ -17,6 +17,7 @@ public class InterviewNotes {
             char ch = chars[i];
         }
         StringBuilder builder = new StringBuilder(str).reverse();
+
     }
 
     @Test
@@ -28,7 +29,7 @@ public class InterviewNotes {
             // entry.setValue()
         }
         intToInt.computeIfPresent(1, (k, v) -> v + 4);
-        intToInt.computeIfAbsent(1, (key) -> 3 + 1);
+        intToInt.computeIfAbsent(1, (key) -> 3 + 1 + key);
         intToInt.entrySet().iterator().next().getValue();
         //intToInt.keySet().iterator()
         final NavigableMap<Integer, Integer> intToIntNavigable = (NavigableMap<Integer, Integer>) intToInt;
@@ -113,12 +114,14 @@ public class InterviewNotes {
 
     @Test
     public void testHeap() {
-        PriorityQueue<Interval> intervals = new PriorityQueue<>();  //comparator
+        PriorityQueue<Interval> intervals = new PriorityQueue<>();
+        Comparator.reverseOrder();//comparator
         Interval inter = new Interval(1, 2);
         intervals.add(inter);
         inter = intervals.peek();
         inter = intervals.poll();
-        PriorityQueue<Interval> heap = new PriorityQueue<>(Comparator.comparing(Interval::getEnd));
+        PriorityQueue<Interval> heap = new PriorityQueue<>(
+                Comparator.comparing(Interval::getEnd).reversed());
         heap.size();
         heap.peek();
         heap.remove(inter);
@@ -129,14 +132,16 @@ public class InterviewNotes {
         List<Interval> intervals = new LinkedList<>();
         Collections.sort(intervals, Comparator.comparing(Interval::getStart).reversed());
         Interval inter = new Interval(3, 4);
-        Collections.binarySearch(intervals, inter, Comparator.comparing(Interval::getStart));
+        int index=Collections.binarySearch(intervals, inter, Comparator.comparing(Interval::getStart));
+        intervals.add(1,inter); //IndexOutOfBoundsExceptio
         ((Deque<Interval>) intervals).addFirst(inter);
         ((Deque<Interval>) intervals).pollFirst();
 
         ((Deque<Interval>) intervals).addFirst(inter);
         ((Deque<Interval>) intervals).addFirst(new Interval(4, 5));
         //  intervals.retainAll(new ArrayList<>());
-        intervals.listIterator(1).next();
+        ListIterator<Interval> lIter=intervals.listIterator(1);
+        lIter.hasPrevious();lIter.next();
         Interval max = Collections.max(intervals);
         Collections.sort(intervals, Comparator.comparing(Interval::getStart));
         System.out.println(intervals.size());
@@ -170,7 +175,8 @@ public class InterviewNotes {
         listList.add(inters1);
         listList.add(inters2);
         List<Integer> ends = listList.stream().sorted((i1, i2) -> i1.size() - i2.size())
-                .flatMap(listInt -> listInt.stream()).sorted(((in1, in2) -> in2.end - in1.end)).map(in -> in.end).collect(Collectors.toList());
+                .flatMap(currentList -> currentList.stream()).sorted(((in1, in2) -> in2.end - in1.end))
+                .map(in -> in.end).collect(Collectors.toList());
         System.out.println(ends);
 
         boolean res = IntStream.range(1, 2).allMatch(e -> e > 0);
@@ -183,6 +189,19 @@ public class InterviewNotes {
 
 // Using Stream.of() treats the array as a single element
         Stream<int[]> numberStream2 = Stream.of(numbers);
+    }
+
+    @Test
+    public  void stream2() {
+        int[] numbers = {5, 8, 3, 2, 9};
+
+        // Approach 1: Using max() with Optional handling
+        OptionalInt maxOptional = Arrays.stream(numbers).max();
+        System.out.println("Max value (Optional): " + maxOptional.getAsInt());
+
+        // Approach 2: Using reduce() with a custom comparator
+        int max = Arrays.stream(numbers).reduce(Integer.MIN_VALUE, Integer::max);
+        System.out.println("Max value (reduce): " + max);
     }
 
 

@@ -1,4 +1,4 @@
-package com.slava;
+package general;
 
 public class InterviewCollection {
 }
