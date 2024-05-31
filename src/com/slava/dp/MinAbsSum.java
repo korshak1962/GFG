@@ -6,13 +6,50 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
+
 //https://app.codility.com/programmers/lessons/17-dynamic_programming/min_abs_sum/
 public class MinAbsSum {
 
+    //https://app.codility.com/demo/results/trainingC4ST83-X6C/  54% performance
+    //https://app.codility.com/demo/results/trainingW2WMH2-AYY/  63% performance
+    public static int solution2D(int[] A) {
+        int sum = 0;
+        for (int i = 0; i < A.length; i++) {
+            A[i] = Math.abs(A[i]);
+            sum += A[i];
+        }
+        if (A.length == 1) {
+            return A[0];
+        }
+        if (A.length == 0) {
+            return 0;
+        }
+        int res = 0;
+        int sumUp = sum / 2;
+        int maxSum = 0;
+        boolean dp[][] = new boolean[A.length][sumUp + 1];
+        for (int j = 1; j < sumUp + 1; j++) {
+            for (int i = 0; i < A.length; i++) {
+                if (A[i] == j || (i > 0 && dp[i - 1][j])) {
+                    dp[i][j] = true;
+                    maxSum = j;
+                } else {
+                    int subSum = j - A[i];
+                    if (subSum > 0 && i > 0 && dp[i - 1][subSum]) {
+                        dp[i][j] = true;
+                        maxSum = j;
+                    }
+                }
+            }
+        }
+        int otherSum = sum - maxSum;
+        res = Math.abs(maxSum - otherSum);
+        return res;
+    }
+
     @Test
     public void testSolutionPerf() {
-        int nDim = 1000;
+        int nDim = 20;
         int maxValue = 100;
         int A[] = new int[nDim];
         for (int i = 0; i < nDim; i++) {
@@ -26,33 +63,25 @@ public class MinAbsSum {
     @Test
     public void testSolution() {
         int A[] = new int[4];
-        A[0] = 2;
+        A[0] = 1;
         A[1] = 5;
-        A[2] = 5;
-        A[3] = 5;
-        int correct = 0;
+        A[2] = -20;
+        A[3] = 2;
+        int correct = 12;
         int res = solution(A);
         Assert.assertEquals(correct, res);
     }
 
-    static int[] dp;
-    public static int sum(int[] array) {
-        int sum = 0;
-        for(int i : array) {
-            sum += i;
-        }
-
-        return sum;
-    }
-
+//https://app.codility.com/demo/results/trainingN5CJKC-GU3/ 100%
     public static int solution(int[] A) {
+        int[] dp;
         int arrayLength = A.length;
         int maxInArray = 0;
         for (int i = 0; i < arrayLength; i++) {
             A[i] = Math.abs(A[i]);
             maxInArray = Math.max(A[i], maxInArray);
         }
-        int S = sum(A);
+        int S = Arrays.stream(A).sum();
         dp = new int[S + 1];
         int[] count = new int[maxInArray + 1];
         for (int i = 0; i < arrayLength; i++) {
@@ -62,7 +91,7 @@ public class MinAbsSum {
         dp[0] = 0;
         for (int i = 1; i < maxInArray + 1; i++) {  // walk throw count
             if (count[i] > 0) {
-                for(int j = 0; j < S; j++) {
+                for (int j = 0; j < S; j++) {
                     if (dp[j] >= 0) {
                         dp[j] = count[i];
                     } else if (j >= i && dp[j - i] > 0) {

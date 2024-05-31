@@ -11,7 +11,7 @@ import java.util.List;
 //https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 public class FindStartIndex {
 
-    private static <T> int getMaxInd(List<? extends Comparable<? super T>> numsWithDupSorted, T key) {
+    public static <T> int getMaxInd(List<? extends Comparable<? super T>> numsWithDupSorted, T key) {
         int indToInsert = Collections.binarySearch(numsWithDupSorted, key);
         while (indToInsert < numsWithDupSorted.size() - 1 && numsWithDupSorted.get(indToInsert + 1).equals(key)) {
             List<? extends Comparable<? super T>> subList = numsWithDupSorted.subList(indToInsert + 1, numsWithDupSorted.size());
@@ -20,11 +20,19 @@ public class FindStartIndex {
         return indToInsert;
     }
 
-    private static <T> int getMinInd(List<? extends Comparable<? super T>> numsWithDupSorted, T key) {
+    public static <T> int getMinInd(List<? extends Comparable<? super T>> numsWithDupSorted, T key) {
         int curInd = Collections.binarySearch(numsWithDupSorted, key);
         while (curInd > 0 && numsWithDupSorted.get(curInd - 1).equals(key)) {
             List<? extends Comparable<? super T>> subList = numsWithDupSorted.subList(0, curInd);
             curInd = Collections.binarySearch(subList, key);
+        }
+        return curInd;
+    }
+
+    public static <T> int getMinIndArray(T[] numsWithDupSorted, T key) {
+        int curInd = Arrays.binarySearch(numsWithDupSorted, key);
+        while (curInd > 0 && numsWithDupSorted[curInd - 1].equals(key)) {
+            curInd = Arrays.binarySearch(numsWithDupSorted,0,curInd, key);
         }
         return curInd;
     }
@@ -40,6 +48,13 @@ public class FindStartIndex {
         List<Integer> intList = List.of(1, 1, 2, 2, 3, 3, 4, 4, 4);
         int res = getMinInd(intList, 4);
         System.out.println(res);
+    }
+
+    @Test
+    public void testDubSearchMinArray() {
+        Integer[] arrayWithDup = {1, 1, 2, 2, 3, 3, 4, 4, 4};
+        int res = getMinIndArray(arrayWithDup, 4);
+        Assert.assertEquals(6,res);
     }
 
 
