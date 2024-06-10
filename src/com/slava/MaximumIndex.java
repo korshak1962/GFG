@@ -3,7 +3,8 @@ package com.slava;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 // https://practice.geeksforgeeks.org/problems/maximum-index/0/
 public class MaximumIndex {
 
@@ -36,7 +37,26 @@ Testcase 1:  In the given array A[1] < A[7] satisfying the required condition(A[
 giving the maximum difference of j - i which is 6(7-1).
      */
 
-    public static void main(String[] args) {
+    static int maxIndexDiff(int a[], int n) {
+        int i = 0;
+        int j = a.length - 1;
+        int aMin = a[i];
+        int aMax = a[a.length - 1];
+        while (i < j) {
+            if (aMin <= aMax) {
+                return j - i;
+            }
+            if (i >= a.length - 1 - j) {
+                aMax = Integer.max(aMax, a[--j]);
+            } else {
+                aMin = Integer.min(aMin, a[++i]);
+            }
+        }
+        return 0;
+    }
+
+
+    public static void main1(String[] args) {
         Scanner sc = new Scanner(System.in);
         int nTest = sc.nextInt();
         for (int it = 0; it < nTest; it++) {
@@ -52,7 +72,7 @@ giving the maximum difference of j - i which is 6(7-1).
           //  System.out.println(findMaxIndexDiff(origArray));
         }
     }
-
+ //   https://www.geeksforgeeks.org/problems/maximum-index-1587115620/1?page=1&difficulty=Medium,Hard&sortBy=submissions
     static private int findMaxIndexDiff(int origArray[]) {
         int[] minIndex = getMinIndexes(origArray);
         int[] maxIndex = getMaxIndexes(origArray);
@@ -75,7 +95,28 @@ giving the maximum difference of j - i which is 6(7-1).
         int[] input = {34, 8, 10, 3, 2, 80, 30, 33, 1};
         int res = findMaxIndexDiff(input);
         Assert.assertEquals(6, res);
+        res = maxIndexDiff(input, input.length);
+        Assert.assertEquals(6, res);
     }
+
+    @Test
+    public void testmaxIndexDiff() {
+        int[] input = {9, 4, 8, 16, 19, 2};
+        int res = findMaxIndexDiff(input);
+        Assert.assertEquals(4, res);
+        res = maxIndexDiff(input, input.length);
+        Assert.assertEquals(4, res);
+    }
+
+    @Test
+    public void testmaxIndexDiff_2() {
+        int[] input = {28, 19, 21, 14, 24, 22, 16, 15, 22, 16, 22, 19, 27, 8, 27};
+        int res = findMaxIndexDiff(input);
+        Assert.assertEquals(13, res);
+        res = maxIndexDiff(input, input.length);
+        //  Assert.assertEquals(13, res);
+    }
+
 
     private static int[] getSortedIndexes(NumAndIndex[] numAndIndices) {
         System.out.println(numAndIndices.length);

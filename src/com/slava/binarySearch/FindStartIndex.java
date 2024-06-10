@@ -37,6 +37,14 @@ public class FindStartIndex {
         return curInd;
     }
 
+    public static <T> int getMaxIndArray(T[] numsWithDupSorted, T key) {
+        int curInd = Arrays.binarySearch(numsWithDupSorted, key);
+        while (curInd > 0 && curInd < numsWithDupSorted.length - 1 && numsWithDupSorted[curInd + 1].equals(key)) {
+            curInd = Arrays.binarySearch(numsWithDupSorted, curInd + 1, numsWithDupSorted.length, key);
+        }
+        return curInd;
+    }
+
     @Test
     public void testDubSearchMax() {
         List<Integer> intList = List.of(1, 1, 2, 2, 3, 3, 4, 4, 4);
@@ -57,6 +65,19 @@ public class FindStartIndex {
         Assert.assertEquals(6,res);
     }
 
+    @Test
+    public void testDubSearchMaxArray() {
+        Integer[] arrayWithDup = {1, 1, 2, 2, 3, 3, 4, 4, 4, 8, 8};
+        int res = getMaxIndArray(arrayWithDup, 4);
+        Assert.assertEquals(8, res);
+    }
+
+    @Test
+    public void testDubSearchMaxArrayNonExists() {
+        Integer[] arrayWithDup = {1, 1, 2, 2, 3, 3, 4, 4, 4, 8, 8};
+        int res = getMaxIndArray(arrayWithDup, 7);
+        Assert.assertEquals(-10, res);
+    }
 
     int findQnty(int[] array, int target) {
         if (array == null || array.length < 1) {
