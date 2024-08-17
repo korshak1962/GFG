@@ -35,7 +35,7 @@ public class InterviewNotes {
         final NavigableMap<Integer, Integer> intToIntNavigable = (NavigableMap<Integer, Integer>) intToInt;
         int r = intToIntNavigable.firstEntry().getValue();
         r = intToIntNavigable.floorEntry(1).getValue();
-        intToIntNavigable.descendingMap(); // reverse order
+        NavigableMap<Integer, Integer> descMap=intToIntNavigable.descendingMap(); // reverse order
         intToIntNavigable.headMap(1, true); // before key
         intToIntNavigable.subMap(1, 5);
         intToIntNavigable.tailMap(2, true);
@@ -135,6 +135,7 @@ public class InterviewNotes {
         int index=Collections.binarySearch(intervals, inter, Comparator.comparing(Interval::getStart));
         intervals.add(1,inter); //IndexOutOfBoundsExceptio
         ((Deque<Interval>) intervals).addFirst(inter);
+        ((Deque<Interval>) intervals).peekLast();
         ((Deque<Interval>) intervals).pollFirst();
 
         ((Deque<Interval>) intervals).addFirst(inter);
