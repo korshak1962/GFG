@@ -18,27 +18,34 @@ If a node is encountered that's already in the recursionStack, a cycle is detect
  */
 
 public class DirectedGraphCycleDetection {
-    public static boolean hasCycle(Map<Integer, List<Integer>> graph) {
-        Set<Integer> visited = new HashSet<>();
-        Set<Integer> recursionStack = new HashSet<>();
+    static Map<Integer, List<Integer>> graph;
+    static Set<Integer> visited;
+    static Set<Integer> recursionStack;
+    static Map<Integer, Integer> parent;
+
+    public static List<Integer> findCycle(Map<Integer, List<Integer>> graph) {
+        DirectedGraphCycleDetection.graph = graph;
+        visited = new HashSet<>();
+        recursionStack = new HashSet<>();
+        parent = new HashMap<>();
 
         for (Integer node : graph.keySet()) {
-            if (dfs(node, graph, visited, recursionStack)) {
-                return true;
+            List<Integer> cycle = dfs(node);
+            if (cycle != null) {
+                return cycle;
             }
         }
 
-        return false;
+        return new ArrayList<>(); // No cycle found
     }
 
-    private static boolean dfs(Integer node, Map<Integer, List<Integer>> graph,
-                               Set<Integer> visited, Set<Integer> recursionStack) {
+    private static List<Integer> dfs(Integer node) {
         if (recursionStack.contains(node)) {
-            return true;
+            return constructCycle(node, parent);
         }
 
         if (visited.contains(node)) {
-            return false;
+            return null;
         }
 
         visited.add(node);
@@ -46,16 +53,31 @@ public class DirectedGraphCycleDetection {
 
         List<Integer> neighbors = graph.getOrDefault(node, new ArrayList<>());
         for (Integer neighbor : neighbors) {
-            if (dfs(neighbor, graph, visited, recursionStack)) {
-                return true;
+            parent.put(neighbor, node);
+            List<Integer> cycle = dfs(neighbor);
+            if (cycle != null) {
+                return cycle;
             }
         }
 
         recursionStack.remove(node);
-        return false;
+        return null;
     }
 
-    public static void main(String[] args) {
+    private static List<Integer> constructCycle(Integer start, Map<Integer, Integer> parent) {
+        List<Integer> cycle = new ArrayList<>();
+        Integer current = start;
+        do {
+            cycle.add(current);
+            current = parent.get(current);
+        } while (!current.equals(start));
+        cycle.add(start);
+        Collections.reverse(cycle);
+        return cycle;
+    }
+
+    @Test
+    public void simpleTrue() {
         // Example usage
         Map<Integer, List<Integer>> graph = new HashMap<>();
         graph.put(0, Arrays.asList(1, 2));
@@ -63,12 +85,13 @@ public class DirectedGraphCycleDetection {
         graph.put(2, Arrays.asList(0, 3));
         graph.put(3, Arrays.asList(3));
 
-        boolean hasCycle = hasCycle(graph);
-        System.out.println("Graph has cycle: " + hasCycle);
+        List<Integer> cycle = findCycle(graph);
+        Assert.assertFalse(cycle.isEmpty());
+        System.out.println("Graph has cycle: " + cycle);
     }
 
     @Test
-    public void simpleFalse(){
+    public void simpleFalse() {
         Map<Integer, List<Integer>> graph = new HashMap<>();
         graph.put(0, List.of(1, 2));
         graph.put(1, List.of(3, 4));
@@ -76,7 +99,8 @@ public class DirectedGraphCycleDetection {
         graph.put(3, List.of(7));
         graph.put(5, List.of(7));
 
-        Assert.assertFalse( hasCycle(graph));
+        List<Integer> cycle = findCycle(graph);
+        Assert.assertTrue(cycle.isEmpty());
 
     }
 }
