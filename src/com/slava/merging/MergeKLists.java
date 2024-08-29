@@ -46,15 +46,15 @@ public class MergeKLists {
 
     List<Integer> mergeLists(List<List<Integer>> listOfLists) {
         List<Integer> result = new LinkedList<>();
-        PriorityQueue<Wrapper> minHeap = new PriorityQueue<>((w1, w2) -> w1.peekValue() - w2.peekValue());
+        PriorityQueue<Wrapper> minHeapWrappers = new PriorityQueue<>((w1, w2) -> w1.peekValue() - w2.peekValue());
         for (List<Integer> lst : listOfLists) {
-            minHeap.add(new Wrapper(lst));
+            minHeapWrappers.add(new Wrapper(lst));
         }
-        while (!minHeap.isEmpty()) {
-            Wrapper polledWrapper = minHeap.poll();
+        while (!minHeapWrappers.isEmpty()) {
+            Wrapper polledWrapper = minHeapWrappers.poll();
             result.add(polledWrapper.pollValue());
             if (polledWrapper.peekValue() != null) {
-                minHeap.add(polledWrapper);
+                minHeapWrappers.add(polledWrapper);
             }
         }
         return result;

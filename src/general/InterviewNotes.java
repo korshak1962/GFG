@@ -204,6 +204,9 @@ public class InterviewNotes {
         // Approach 2: Using reduce() with a custom comparator
         int max = Arrays.stream(numbers).reduce(Integer.MIN_VALUE, Integer::max);
         System.out.println("Max value (reduce): " + max);
+        max = Arrays.stream(numbers).max().getAsInt();
+        System.out.println("Max value (reduce): " + max);
+
     }
 
 
