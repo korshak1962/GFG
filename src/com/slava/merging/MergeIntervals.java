@@ -12,6 +12,27 @@ import java.util.*;
  */
 public class MergeIntervals {
 
+    // it requires additional memory
+    public static List<Interval> mergeIntervalsStream(List<Interval> intervals) {
+        return intervals.stream()
+            .sorted(Comparator.comparingInt(i -> i.start))
+            .reduce(
+                new ArrayList<Interval>(),
+                (merged, interval) -> {
+                    if (merged.isEmpty() || merged.get(merged.size() - 1).end < interval.start) {
+                        merged.add(interval);
+                    } else {
+                        merged.get(merged.size() - 1).end = Math.max(merged.get(merged.size() - 1).end, interval.end);
+                    }
+                    return merged;
+                },
+                (list1, list2) -> {
+                    list1.addAll(list2);
+                    return list1;
+                }
+            );
+    }
+
     @Test
     public void testSimple() {
         List<Interval> unmergedIntervals = new LinkedList<>();

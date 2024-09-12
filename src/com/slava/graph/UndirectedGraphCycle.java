@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.*;
 
+//https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1?page=1&difficulty=Medium,Hard&sortBy=submissions
 public class UndirectedGraphCycle {
 
     private ArrayList<ArrayList<Integer>> adj;

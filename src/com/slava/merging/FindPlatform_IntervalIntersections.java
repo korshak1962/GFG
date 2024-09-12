@@ -10,6 +10,25 @@ public class FindPlatform_IntervalIntersections {
 
     static int findPlatform(final int arr[], int dep[], int n) {
         int res = 0;
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        int iArr = 0, iDep = 0;
+        int platforms = 0;
+        while (iArr < arr.length) {
+            if (arr[iArr] <= dep[iDep]) {
+                platforms++;
+                iArr++;
+                res = Integer.max(res, platforms);
+            } else {
+                platforms--;
+                iDep++;
+            }
+        }
+        return res;
+    }
+
+    static int findPlatform1(final int arr[], int dep[], int n) {
+        int res = 0;
         List<Schedule> schedules = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
             schedules.add(new Schedule(arr[i], dep[i]));
@@ -47,4 +66,6 @@ public class FindPlatform_IntervalIntersections {
         int dep[] = {1000, 1200, 1240};
         Assert.assertEquals(1, findPlatform(arr, dep, arr.length));
     }
+
+
 }

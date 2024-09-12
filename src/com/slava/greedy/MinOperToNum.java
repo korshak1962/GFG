@@ -15,7 +15,8 @@ public class MinOperToNum {
 Double the number
 Add one to the number
 Input:
-The first line of input contains an integer T denoting the number of test cases. Then T test cases follow. Each test case contains an integer N.
+The first line of input contains an integer T denoting the number of test cases.
+Then T test cases follow. Each test case contains an integer N.
 
 Output:
 For each test case, in a new line, print the minimum number of operations required to reach N from 0.

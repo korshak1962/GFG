@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class LRUCache {
     private LinkedHashMap<Integer, Integer> cache;
-    private int capacity;
 
     public LRUCache(int capacity) {
 
@@ -18,7 +17,7 @@ public class LRUCache {
                 return  cache.size() > capacity;
             }
         };
-        this.capacity = capacity;
+
     }
 
     public int get(int key) {

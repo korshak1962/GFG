@@ -5,7 +5,8 @@ import org.junit.Test;
 
 import java.util.*;
 /*
-This implementation uses a depth-first search (DFS) approach to detect cycles in the directed graph. Here's a brief explanation of how it works:
+This implementation uses a depth-first search (DFS) approach to detect cycles
+ in the directed graph. Here's a brief explanation of how it works:
 
 The hasCycle method iterates through all nodes in the graph, calling dfs on each unvisited node.
 The dfs method uses two sets:
