@@ -3,6 +3,7 @@ package general;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +19,107 @@ import java.util.stream.Stream;
 import org.junit.Test;
 
 public class StreamTest {
+
+  //Calculate the sum of all even numbers in the numbers list.
+  @Test
+  public void testStream() {
+    Stream<Integer> numberUnder100 = Stream.iterate(
+        1, // seed
+        n -> n < 10, // Predicate to specify when done
+        n -> ++n);
+    int res = numberUnder100.filter(n -> n % 2 == 0).mapToInt(Integer::intValue).sum();
+    System.out.println(res);
+    Stream<Integer> numbers = Stream.iterate(
+        1, // seed
+        n -> n < 10, // Predicate to specify when done
+        n -> ++n);
+    int sumOfEven = numbers
+        .filter(n -> n % 2 == 0)
+        .reduce(100, Integer::sum);
+    System.out.println(sumOfEven);
+  }
+
+  //List of uppercase words: Convert all words in the words list to uppercase.
+  @Test
+  public void testStream1() {
+    List<String> res = List.of("a", "b", "c").parallelStream().map(String::toUpperCase).
+        toList();
+    System.out.println(res);
+  }
+
+  //Average age of people: Calculate the average age of all people in the people list.
+  @Test
+  public void testStream2() {
+    int res = (int) List.of(new Person("A", 10), new Person("B", 20))
+        .stream()
+        .mapToInt(Person::getAge).average().orElse(0);
+    System.out.println(res);
+  }
+
+  //  Task 4: Names of people older than 30
+  @Test
+  public void testStream3() {
+    List.of(new Person("A", 10), new Person("B", 20))
+        .stream()
+        .filter(p -> p.getAge() > 30)
+        .map(Person::getName)
+        .forEach(System.out::println);
+  }
+
+  // Task 5: Check if all numbers are positive
+  @Test
+  public void testStream4() {
+    int[] ar = {1, 2, 3, 5};
+    boolean res = Arrays.stream(ar).allMatch(in -> in > 0);
+    System.out.println(res);
+  }
+
+  // Task 6: Find the longest word
+  @Test
+  public void testStream5() {
+    String res = List.of("a", "bb", "ccc").stream()
+        .max(Comparator.comparing(String::length))
+        .get();
+    System.out.println(res);
+  }
+
+  @Test
+  public void testStream6() {
+    int res = IntStream.range(1, 6).reduce(1, (a, b) -> a * b);
+    System.out.println(res);
+  }
+
+  @Test
+  public void testStream61() {
+    Person person = List.of(new Person("A", 10),
+        new Person("B", 20),
+        new Person("C", 30))
+        .stream()
+            .sorted(Comparator.comparing(Person::getAge))
+        .collect(Collectors.toList())
+        .get(1);
+    System.out.println(person);
+  }
+
+  // Task 7:Group people by age: Create a Map where the key is age and the value is a List of people of that age.
+  @Test
+  public void testStream7() {
+    List<Person> people = List.of(new Person("A", 10), new Person("B", 20), new Person("C", 10));
+    Map<Integer, List<Person>> groupedByAge = people.stream()
+        .collect(Collectors.groupingBy(Person::getAge));
+    System.out.println(groupedByAge);
+  }
+
+  // Task 8: Create a comma-separated string of sorted numbers
+  @Test
+  public void testStream8() {
+    List<Integer> numbers = List.of(5, 3, 9, 1, 7);
+    String sortedNumbers = numbers.stream()
+        .sorted()
+        .map(Object::toString)
+        .collect(Collectors.joining(", "));
+    System.out.println(sortedNumbers);
+  }
 
   public void test() {
     var list = List.of("a", "b", "c");
@@ -135,11 +237,19 @@ public class StreamTest {
 
   static class Person {
     String name;
-    int age;
+    public int age;
 
     Person(String name, int age) {
       this.name = name;
       this.age = age;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public int getAge() {
+      return age;
     }
 
     @Override
@@ -192,7 +302,8 @@ public class StreamTest {
 
     record AgeStats(Map<String, Double> averageAgeByName, double overallAverageAge) {
     }
-    record Separations(String spaceSeparated, String commaSeparated) {}
+    record Separations(String spaceSeparated, String commaSeparated) {
+    }
     AgeStats ageStats = people.stream().collect(
         Collectors.teeing(
             Collectors.groupingBy(
@@ -219,7 +330,7 @@ public class StreamTest {
   }
 
   private static Stream<Integer> boxing(IntStream stream) {
-    Stream<Integer> iStream = Stream.of(1,2,3);
+    Stream<Integer> iStream = Stream.of(1, 2, 3);
 
     return stream.boxed();
   }

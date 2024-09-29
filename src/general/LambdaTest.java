@@ -29,6 +29,7 @@ public class LambdaTest {
      StringStart lambdaInst = s -> str.startsWith(s);
 
      System.out.println(methodRefInst.beginningCheck("A")); // false
+
   }
 
 }

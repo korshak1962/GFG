@@ -4,8 +4,6 @@ import java.util.*;
 
 public class CallLimit {
 
-    /* package whatever; // don't place package name! */
-
 
     /*
      ** Implement a rate-limiting algorithm that can be used to restrict the number of calls to a web service.

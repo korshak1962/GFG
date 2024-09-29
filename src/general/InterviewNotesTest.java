@@ -71,6 +71,10 @@ public class InterviewNotesTest {
     intToIntNavigable.headMap(1, true); // before key
     intToIntNavigable.subMap(1, 5);
     intToIntNavigable.tailMap(2, true);
+// compare by value
+    intToIntNavigable.entrySet().stream()
+        .sorted( Map.Entry.<Integer, Integer>  comparingByValue().reversed())
+        .limit(2).forEach(System.out::println);
   }
 
   public static class Interval implements Comparable {
