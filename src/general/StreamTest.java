@@ -329,11 +329,23 @@ public class StreamTest {
     System.out.println(result);
   }
 
+  @Test
+  public void testStreamToMap2() {
+    int[] numbers = {1, 2, 3, 4, 5};
+
+    int sum = Arrays.stream(numbers).sum();
+    System.out.println(sum);
+    LinkedList<Integer>  list = new LinkedList<>();
+    list.add(0,1);
+  }
+
   private static Stream<Integer> boxing(IntStream stream) {
     Stream<Integer> iStream = Stream.of(1, 2, 3);
 
     return stream.boxed();
   }
+
+
 
 }
 

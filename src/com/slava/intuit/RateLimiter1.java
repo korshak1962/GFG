@@ -1,10 +1,42 @@
 package com.slava.intuit;
 
+import org.junit.jupiter.api.Assertions;
+
 public class RateLimiter1 {
+
+  public static void main(String arg[]) throws InterruptedException {
+
+    // testTrue
+    RateLimiter1 rateLimiter = new RateLimiter1(3, 1);
+    boolean isAllowed = rateLimiter.isAllowed();
+    for (int i = 0; i < 2; i++) {
+      isAllowed =rateLimiter.isAllowed(); // true
+    }
+    Assertions.assertTrue(isAllowed);
+
+    // testFalse
+
+      for (int i = 0; i < 5; i++) {
+        isAllowed =rateLimiter.isAllowed(); // true
+      }
+      Assertions.assertFalse(isAllowed);
+
+    // testTrue
+    Thread.sleep(1000);
+    for (int i = 0; i < 3; i++) {
+      isAllowed =rateLimiter.isAllowed(); // true
+    }
+    Assertions.assertTrue(isAllowed);
+
+  }
 
   private final double rate;
   private double tokens;
   private long lastRefillTimestamp;
+
+  public RateLimiter1(){
+    this.rate=0;
+  }
 
   public RateLimiter1(int maxCalls, long timeFrameSeconds) {
     this.rate = (double) maxCalls / timeFrameSeconds;
@@ -28,5 +60,5 @@ public class RateLimiter1 {
     tokens = Math.min(tokens + newTokens, rate);
     lastRefillTimestamp = now;
   }
-
 }
+
