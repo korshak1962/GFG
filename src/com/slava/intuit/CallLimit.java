@@ -11,7 +11,8 @@ public class CallLimit {
 
     public static void main(String[] args) {
         RateLimiter rateLimiter = new RateLimiter();
-
+String a ="";
+a.contains("");
         //Return true within 30 seconds if allowed
         System.out.println(rateLimiter.rateLimit("device_info", 30, 3));
         System.out.println(rateLimiter.rateLimit("device_info", 30, 3));

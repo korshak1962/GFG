@@ -2,6 +2,9 @@ package com.slava.intuit;
 
 import org.junit.jupiter.api.Assertions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RateLimiter1 {
 
   public static void main(String arg[]) throws InterruptedException {
@@ -42,6 +45,9 @@ public class RateLimiter1 {
     this.rate = (double) maxCalls / timeFrameSeconds;
     this.tokens = maxCalls;
     this.lastRefillTimestamp = System.nanoTime();
+    int b[] = {3,8,99,7,15};
+    List<Integer> lst = new ArrayList<>();
+    lst.add(2,2);
   }
 
   public boolean isAllowed() {
