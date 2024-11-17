@@ -1,4 +1,4 @@
-package com.slava.majorityElement;
+package com.slava.arraysTasks;
 
 import org.junit.Assert;
 import org.junit.Test;

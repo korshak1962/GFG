@@ -9,12 +9,7 @@ public class MaxSliceSum {
 
     @Test
     public void test() {
-        int[] A = new int[5];
-        A[0] = 3;
-        A[1] = 2;
-        A[2] = -6;
-        A[3] = 4;
-        A[4] = 0;
+        int[] A = {3,2,-6,4,0};
         int res = solution(A);
         Assert.assertEquals(5, res);
     }
