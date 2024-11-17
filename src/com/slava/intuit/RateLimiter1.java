@@ -18,7 +18,6 @@ public class RateLimiter1 {
     Assertions.assertTrue(isAllowed);
 
     // testFalse
-
       for (int i = 0; i < 5; i++) {
         isAllowed =rateLimiter.isAllowed(); // true
       }
