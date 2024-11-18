@@ -139,7 +139,7 @@ public class InterviewNotesTest {
     List<Integer> list = Arrays.stream(arri)
         .boxed()
         .collect(Collectors.toList());
-
+    list.sort(Comparator.naturalOrder());
     Integer arr[] = {1, 2, 3};
     List<Integer> list1 = Arrays.asList(arr);
     Interval[] ar = new Interval[3];
