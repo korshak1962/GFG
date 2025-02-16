@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Assertions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RateLimiter1 {
+public class RateLimiterTokens {
 
   public static void main(String arg[]) throws InterruptedException {
 
     // testTrue
-    RateLimiter1 rateLimiter = new RateLimiter1(3, 1);
+    RateLimiterTokens rateLimiter = new RateLimiterTokens(3, 1);
     boolean isAllowed = rateLimiter.isAllowed();
     for (int i = 0; i < 2; i++) {
       isAllowed =rateLimiter.isAllowed(); // true
@@ -36,11 +36,11 @@ public class RateLimiter1 {
   private double tokens;
   private long lastRefillTimestamp;
 
-  public RateLimiter1(){
+  public RateLimiterTokens(){
     this.rate=0;
   }
 
-  public RateLimiter1(int maxCalls, long timeFrameSeconds) {
+  public RateLimiterTokens(int maxCalls, long timeFrameSeconds) {
     this.rate = (double) maxCalls / timeFrameSeconds;
     this.tokens = maxCalls;
     this.lastRefillTimestamp = System.nanoTime();
@@ -66,4 +66,3 @@ public class RateLimiter1 {
     lastRefillTimestamp = now;
   }
 }
-
