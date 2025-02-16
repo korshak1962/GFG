@@ -1,8 +1,19 @@
 package com.slava.apixio;
 
-import java.io.*;
+
 import java.util.*;
 import java.util.stream.Collectors;
+
+/// Problem Below:
+// /**
+// Given a string, return recursively a "cleaned" string
+// where adjacent chars that are the same have been reduced to a single char.
+// So "yyzzza" yields "yza".
+
+// stringClean("yyzzza") → "yza"
+// stringClean("abbbcdd") → "abcd"
+// stringClean("Hello") → "Helo"
+// */
 
 public class RecursionRemoveLetter {
     /*
@@ -20,7 +31,8 @@ public class RecursionRemoveLetter {
 
         //  System.out.println(stringClean("yyzzza"));
         System.out.println(stringClean("dd"));
-        List<String> res=Arrays.stream(" a b".trim().split(" ")).collect(Collectors.toList());
+        List<String> res=Arrays.stream(" a b".trim().split(" "))
+                .collect(Collectors.toList());
         System.out.println(res);
         System.out.println(stringClean("Hello"));
         System.out.println(stringClean("dd".toUpperCase()));
@@ -57,14 +69,7 @@ public class RecursionRemoveLetter {
 // Enjoy your interview!
 
 
-/// Problem Below:
-// /**
-// Given a string, return recursively a "cleaned" string where adjacent chars that are the same have been reduced to a single char. So "yyzzza" yields "yza".
 
-// stringClean("yyzzza") → "yza"
-// stringClean("abbbcdd") → "abcd"
-// stringClean("Hello") → "Helo"
-// */
 
 
 
