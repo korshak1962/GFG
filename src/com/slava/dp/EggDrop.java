@@ -78,7 +78,14 @@ Output: 4
         Assert.assertEquals(3, eggDrop(3, 5));
     }
 
-    static int eggDropUnlimited(int n, int k) {
+
+    @Test
+    public void testUnlim(){
+        int res = eggDropUnlimited(36);
+        System.out.println(res);
+    }
+
+    static int eggDropUnlimited( int k) {
         int[] floors = new int[k + 1];
         floors[0] = 0;
         floors[1] = 1;

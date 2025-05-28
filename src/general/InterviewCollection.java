@@ -15,6 +15,7 @@ public class InterviewCollection {
         intToInt.put(3, 1);
         intToInt.put(8, 2);
 
+
 // Sort by value then by key, and collect only the keys
         List<Integer> sortedKeys = intToInt.entrySet()
                 .stream()

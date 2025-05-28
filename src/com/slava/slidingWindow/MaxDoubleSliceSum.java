@@ -110,7 +110,8 @@ public class MaxDoubleSliceSum {
         int[] postfixMaxSum = new int[inputArray.length];
         prefixMaxSum[0] = 0;
         for (int index = 1; index < inputArray.length; index++) {
-            prefixMaxSum[index] = Integer.max(prefixMaxSum[index - 1] + inputArray[index],Integer.max(0,inputArray[index]));
+            prefixMaxSum[index] = Integer.max(prefixMaxSum[index - 1] + inputArray[index],
+                    Integer.max(0,inputArray[index]));
         }
         postfixMaxSum[inputArray.length - 1] = 0;
         for (int index = inputArray.length - 2; index > 0; index--) {
