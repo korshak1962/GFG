@@ -115,10 +115,12 @@ Test Case 2: With W = 3, there is no item you can choose from the given list as 
         }
         for (int k = 1; k < values.length; k++) {
             for (int i = 1; i < maxWeight + 1; i++) {
+                int without = dp[k - 1][i];
                 if (i - weights[k] >= 0) {
-                    dp[k][i] = Integer.max(dp[k - 1][i], dp[k - 1][i - weights[k]] + values[k]);
+                    int with = dp[k - 1][i - weights[k]] + values[k];
+                    dp[k][i] = Integer.max(without, with);
                 } else {
-                    dp[k][i] = dp[k - 1][i];
+                    dp[k][i] = without;
                 }
                 result = Integer.max(result, dp[k][i]);
             }
