@@ -50,12 +50,18 @@ public class NumberToString {
         intToWords.put(9, "nine");
 
         intToWords.put(20, "twenty");
+        intToWords.put(30, "thirty");
+        intToWords.put(40, "fourty");
+        intToWords.put(50, "fifty");
+        intToWords.put(60, "sixty");
+        intToWords.put(70, "seventy");
+        intToWords.put(80, "eighty");
         intToWords.put(90, "ninety");
     }
 
     @Test
     public void test998() {
-        System.out.println(up999(998));
+        System.out.println(up999(978));
     }
 
     @Test

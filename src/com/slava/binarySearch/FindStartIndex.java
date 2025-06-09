@@ -229,12 +229,48 @@ public class FindStartIndex {
         System.out.println(Integer.toBinaryString(a));
     }
 
+    @Test
+    public void testDivide(){
+        int res=divide(10,3);
+        System.out.println(res);
+    }
 
-    // @Test
+    public int divide(int dividend, int divisor) {
+        if(dividend == 1<<31 && divisor == -1) return Integer.MAX_VALUE;
+
+        boolean sign = (dividend>=0) == (divisor >=0) ? true : false;
+
+        dividend = Math.abs(dividend);
+        divisor = Math.abs(divisor);
+        int result=0;
+        while(dividend - divisor >= 0 ){
+            int count=0;
+            while(true){
+                int mlt = divisor << 1 << count;
+                if (!(dividend  - mlt >= 0)) break;
+                count++;
+            }
+
+            result += 1 << count;
+            dividend -= divisor << count ;
+        }
+
+        return sign?result: -result ;
+    }
+
+
+    @Test
     public void testShift() {
-        Short a = 60;
+        Short a = 30;
         System.out.println(Integer.toBinaryString(a));
-        System.out.println(Integer.toBinaryString(a >> 1));
+        int c =10<< 1<<3;
+        System.out.println("c = "+c);
+
+        int b = a << c;
+        System.out.println(Integer.toBinaryString(b));
+        System.out.println("b = "+b);
+        b = b >> 2;
+        System.out.println("b1 = "+b);
         System.out.println(a >> 1);
         System.out.println(Integer.toBinaryString(a << 1));
         System.out.println(a << 1);
