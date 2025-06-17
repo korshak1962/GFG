@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.TreeMap;
 import org.junit.Test;
 
+//Sort an array according to absolute difference with given value
 public class AbsDiffSort {
   static void sortABS(int k, List<Integer> arr) {
     Integer[] indices = new Integer[arr.size()];

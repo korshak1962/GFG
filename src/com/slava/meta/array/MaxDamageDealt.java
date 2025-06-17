@@ -22,11 +22,6 @@ public class MaxDamageDealt {
     int iDamage = 0;
 
 
-    double computeDamage(Warrior wH,Warrior w2, int b) {
-
-        return (damage1 + damage2) * b / (helth1 + heth2);
-    }
-
     class Warrior {
         int id;
         int health;

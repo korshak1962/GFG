@@ -4,8 +4,9 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+//https://www.geeksforgeeks.org/dsa/the-stock-span-problem/
+// Kadane not hashMap<Price,minIndex>
 public class CalculateSpan {
-
     public static int[] calculateSpan(int price[], int n) {
         int[] spans = new int[price.length];
         int span = 1;

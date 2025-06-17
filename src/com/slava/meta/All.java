@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class All {
 
-
+    /// search in sorted array
     int findFirst(int ar[], int v) {
         int lower = 0;
         int upper = ar.length - 1;
@@ -72,6 +72,7 @@ public class All {
         }
     }
 
+    // finf max meeting rooms
     int maxRoom(int[] start, int[] end) {
         int res = 1;
         List<Interval> intervals = new ArrayList<>();
@@ -103,7 +104,7 @@ public class All {
         // Assert.assertEquals(3, res);
     }
 
-
+    //
     class Trie {
         Map<Character, Trie> charToChild = new HashMap<>();
         boolean endWord;
@@ -179,11 +180,12 @@ public class All {
         }
     }
 
-    List<Integer> mergeLists(List<Deque<Integer>> lists) {
+    List<Integer> mergeLists(List<Queue<Integer>> lists) {
         List<Integer> result = new ArrayList<>();
-        PriorityQueue<Deque<Integer>> heapLnk = new PriorityQueue<>(Comparator.nullsLast(Comparator.comparing(Deque::peek)));
+        PriorityQueue<Queue<Integer>> heapLnk = new PriorityQueue<>(
+                Comparator.nullsLast(Comparator.comparing(Queue::peek)));
         heapLnk.addAll(lists);
-        Deque<Integer> top = heapLnk.poll();
+        Queue<Integer> top = heapLnk.poll();
         while (top != null && top.peek() != null) {
             result.add(top.poll());
             if (top.peek() != null) heapLnk.add(top);
@@ -195,9 +197,9 @@ public class All {
     @Test
     public void testLnk() {
         Deque<Integer> lst1 = new LinkedList<>(List.of(1, 2));
-        Deque<Integer> lst2 = new LinkedList<>(List.of(3, 4));
+        Deque<Integer> lst2 = new LinkedList<>(List.of(3, 4, 8));
         Deque<Integer> lst3 = new LinkedList<>(List.of(5, 5, 5, 6));
-        List<Deque<Integer>> listOfLists = new LinkedList<>();
+        List<Queue<Integer>> listOfLists = new LinkedList<>();
         listOfLists.add(lst1);
         listOfLists.add(lst2);
         listOfLists.add(lst3);
