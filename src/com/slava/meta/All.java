@@ -7,6 +7,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/*
+1.string = "1+2*3" - calc str with only + and *
+2. Diameter of binary tree
+3. Range in BST
+4. min of depature and return  d[]={12,9,8,23,25}  r[]={25,66,5,77,88,99}
+5. get int[] from two  merging BST
+6. design crawler
+7. The most dificult task,action from manager, best accomplishment
+ */
+
 public class All {
 
     /// search in sorted array
