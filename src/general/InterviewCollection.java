@@ -15,6 +15,16 @@ public class InterviewCollection {
         intToInt.put(3, 1);
         intToInt.put(8, 2);
 
+      List<Integer> sortedValues = intToInt.values().stream().sorted(Comparator.comparingInt(Integer::intValue)).collect(Collectors.toList());
+        intToInt.entrySet().stream()
+                .sorted(Comparator.comparing(entry -> entry.getKey()))
+                .forEach(System.out::println);
+        intToInt.entrySet().stream()
+                .sorted(Comparator.comparing(Map.Entry::getKey))
+                .forEach(System.out::println);
+        intToInt.entrySet().stream()
+                .sorted(Comparator.comparing(Map.Entry<Integer,Integer>::getKey).thenComparing(Map.Entry::getValue))
+                .forEach(System.out::println);
 
 // Sort by value then by key, and collect only the keys
         List<Integer> sortedKeys = intToInt.entrySet()

@@ -23,6 +23,19 @@ public class Kadane {
         return maxSum;
     }
 
+    public int maximumProfit(int prices[]) {
+        int sum =0 ;
+        int forReturn =0;
+        for (int i=0;i<prices.length-1;i++){
+            int delta =prices[i+1]-prices[i];
+            sum+=delta;
+            if (sum<delta) {
+                sum = delta;
+            }
+            forReturn = Integer.max(forReturn,sum);
+        }
+        return forReturn;
+    }
 
     @Test
     public void test() {

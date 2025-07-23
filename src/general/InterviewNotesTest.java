@@ -49,6 +49,11 @@ public class InterviewNotesTest {
     System.out.println(opt.orElseGet(() -> String.valueOf(1)));
   }
 
+//https://www.geeksforgeeks.org/problems/sort-a-string2943/1
+  String sort(String s) {
+    return s.chars().sorted().mapToObj(c -> String.valueOf((char) c)).collect(Collectors.joining());
+  }
+
   @Test
   public void testMap() {
     Map<Integer, Integer> intToInt = new TreeMap<>();
@@ -257,7 +262,11 @@ public class InterviewNotesTest {
   @Test
   public void stream2() {
     int[] numbers = {5, 8, 3, 2, 9};
-
+    int[] array = {1, 2, 1, 3, 2};
+    ArrayList<Integer> list = Arrays.stream(array)
+            .distinct()
+            .boxed()  // Convert IntStream to Stream<Integer>
+            .collect(Collectors.toCollection(ArrayList::new));
     // Approach 1: Using max() with Optional handling
     OptionalInt maxOptional = Arrays.stream(numbers).max();
     System.out.println("Max value (Optional): " + maxOptional.getAsInt());
