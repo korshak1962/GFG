@@ -174,8 +174,7 @@ public class InterviewNotesTest {
 
   @Test
   public void testHeap() {
-    PriorityQueue<Interval> intervals = new PriorityQueue<>();
-    Comparator.reverseOrder();//comparator
+    PriorityQueue<Interval> intervals = new PriorityQueue<>(Comparator.reverseOrder());
     Interval inter = new Interval(1, 2);
     intervals.add(inter);
     inter = intervals.peek();

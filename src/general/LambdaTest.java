@@ -33,10 +33,13 @@ public class LambdaTest {
   }
 
 }
+
+@FunctionalInterface
 interface Converter {
   long round(double num);
 }
 
+@FunctionalInterface
 interface StringStart {
   boolean beginningCheck(String prefix);
 }

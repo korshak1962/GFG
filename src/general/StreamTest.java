@@ -26,7 +26,7 @@ public class StreamTest {
                 n -> ++n);
         int sumOfEven = numbers
                 .filter(n -> n % 2 == 0)
-                .reduce(100, Integer::sum);
+                .reduce(60, Integer::sum);
         System.out.println(sumOfEven);
     }
 
@@ -369,6 +369,14 @@ public class StreamTest {
                 ).reversed())
                 .collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()
                         , (e1, e2) -> e1, LinkedHashMap::new));
+    }
+
+    @Test
+    public void testStreamString() {
+        List<String> employees = List.of("aaa","SS");
+        List<String> employee = employees.stream().
+                filter(e->e.charAt(0)=='S').collect(Collectors.toList());
+        System.out.println(employee);
     }
 
 }

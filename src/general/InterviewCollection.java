@@ -117,6 +117,32 @@ public class InterviewCollection {
         }
     }
 
+
+    public class MapSortingExample {
+        public static void main(String[] args) {
+            Map<String, Integer> scores = new HashMap<>();
+            scores.put("Alice", 85);
+            scores.put("Bob", 92);
+            scores.put("Charlie", 78);
+            scores.put("Diana", 96);
+            scores.put("Eve", 88);
+
+            // Sort by values in ascending order
+            Map<String, Integer> sortedByValue = scores.entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByValue())
+                    .collect(Collectors.toMap(
+                            Map.Entry::getKey,
+                            Map.Entry::getValue,
+                            (e1, e2) -> e1,
+                            LinkedHashMap::new
+                    ));
+
+            System.out.println("Sorted by value (ascending):");
+            sortedByValue.forEach((k, v) -> System.out.println(k + ": " + v));
+        }
+    }
+
 }
 
 
