@@ -1,4 +1,4 @@
-package com.slava.concurrecy;
+package com.slava.system_design.log_aggregator;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class HealthChecker {
     final MessageConsumer messageConsumer;
 
-    public HealthChecker(MessageConsumer messageConsumer,int maxQueueLength) {
+    public HealthChecker(MessageConsumer messageConsumer, int maxQueueLength) {
         this.messageConsumer = messageConsumer;
     }
 
@@ -27,17 +27,17 @@ public class HealthChecker {
         // Run every 10 seconds
         scheduler.scheduleAtFixedRate(() -> {
             Thread.currentThread().setDaemon(true);
-
-                try {
-                    messageConsumer.getMetric_QueueSize();
-                } catch (Exception e) {
-                    sendAlert();
-                }
+            if (Thread.interrupted()) return;
+            try {
+                messageConsumer.getMetric_QueueSize();
+            } catch (Exception e) {
+                sendAlert();
+            }
 
         }, 0, 1, TimeUnit.SECONDS);
     }
 
-    public void stop(){
+    public void stop() {
         scheduler.shutdown();
     }
 

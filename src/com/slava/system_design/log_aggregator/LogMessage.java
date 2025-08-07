@@ -1,4 +1,4 @@
-package com.slava.concurrecy;
+package com.slava.system_design.log_aggregator;
 
 public class LogMessage {
     String log;

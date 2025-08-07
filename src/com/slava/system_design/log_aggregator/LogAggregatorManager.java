@@ -1,4 +1,4 @@
-package com.slava.concurrecy;
+package com.slava.system_design.log_aggregator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class LogAggregatorManager {
     public void start() {
         queue = new LinkedBlockingDeque<>();
         MessageConsumer messageConsumer = new MessageConsumer(fileWriterProvider, queue);
-        CompletableFuture future = CompletableFuture.runAsync(messageConsumer);
+        CompletableFuture<Void> future = CompletableFuture.runAsync(messageConsumer);
         healthChecker = new HealthChecker(messageConsumer, maxQueueLength);
         healthChecker.checkHealth();
         metricsConsumer = new MetricsConsumer(messageConsumer);
