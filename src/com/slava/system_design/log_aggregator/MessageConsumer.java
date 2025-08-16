@@ -12,7 +12,7 @@ public class MessageConsumer implements Runnable {
     private final BlockingQueue<LogMessage> queue;
     private FileWriter logWriter;
     public volatile boolean shutdownRequested = false;
-    private final BlockingDeque<Long> lastSuccessWrites = new LinkedBlockingDeque<>(List.of(System.currentTimeMillis()));
+    private final BlockingDeque<Long> lastSuccessWritesTimes = new LinkedBlockingDeque<>(List.of(System.currentTimeMillis()));
     private final int lastSuccessWritesSize = 1000;
     private final BlockingDeque<LogMessage> deadLetterQueue = new LinkedBlockingDeque<>();
     private final BlockingDeque<Exception> exceptions = new LinkedBlockingDeque<>();
@@ -30,7 +30,7 @@ public class MessageConsumer implements Runnable {
     }
 
     public float getMetric_SpeedWrite() {
-        return ((float) lastSuccessWrites.size()) / (lastSuccessWrites.getFirst() - lastSuccessWrites.getLast());
+        return ((float) lastSuccessWritesTimes.size()) / (lastSuccessWritesTimes.getFirst() - lastSuccessWritesTimes.getLast());
     }
 
     public BlockingDeque<Exception> getExceptions() {
@@ -66,14 +66,14 @@ public class MessageConsumer implements Runnable {
         try {
             logWriter.write(logMessage.toString());
             attempts = 0;
-            lastSuccessWrites.add(System.currentTimeMillis());
-            while (lastSuccessWrites.size() > lastSuccessWritesSize) {
-                lastSuccessWrites.removeFirst();
+            lastSuccessWritesTimes.add(System.currentTimeMillis());
+            while (lastSuccessWritesTimes.size() > lastSuccessWritesSize) {
+                lastSuccessWritesTimes.removeFirst();
             }
         } catch (IOException e) {
             attempts++;
+            exceptions.add(e);
             if (attempts > 3) {
-                exceptions.add(e);
                 FileWriter prevLogWriter = logWriter;
                 logWriter = fileWriterProvider.getFileWriter();
                 try {

@@ -22,8 +22,6 @@ public class TokenFiller {
     public void sendAlert() {
     }
 
-    ;
-
     public void fillTokensByTmeFrame(TimeUnit timeUnit) {
         scheduler.scheduleAtFixedRate(() -> {
             Thread.currentThread().setDaemon(true);

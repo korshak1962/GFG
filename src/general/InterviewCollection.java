@@ -15,7 +15,7 @@ public class InterviewCollection {
         intToInt.put(3, 1);
         intToInt.put(8, 2);
 
-      List<Integer> sortedValues = intToInt.values().stream().sorted(Comparator.comparingInt(Integer::intValue)).collect(Collectors.toList());
+        List<Integer> sortedValues = intToInt.values().stream().sorted(Comparator.comparingInt(Integer::intValue)).collect(Collectors.toList());
         intToInt.entrySet().stream()
                 .sorted(Comparator.comparing(entry -> entry.getKey()))
                 .forEach(System.out::println);
@@ -23,7 +23,7 @@ public class InterviewCollection {
                 .sorted(Comparator.comparing(Map.Entry::getKey))
                 .forEach(System.out::println);
         intToInt.entrySet().stream()
-                .sorted(Comparator.comparing(Map.Entry<Integer,Integer>::getKey).thenComparing(Map.Entry::getValue))
+                .sorted(Comparator.comparing(Map.Entry<Integer, Integer>::getKey).thenComparing(Map.Entry::getValue))
                 .forEach(System.out::println);
 
 // Sort by value then by key, and collect only the keys
@@ -141,6 +141,41 @@ public class InterviewCollection {
             System.out.println("Sorted by value (ascending):");
             sortedByValue.forEach((k, v) -> System.out.println(k + ": " + v));
         }
+    }
+
+    class StringToScore implements Comparable<StringToScore> {
+        final private String name;
+        final private int score;
+
+        StringToScore(String name, int scorre) {
+            this.name = name;
+            this.score = scorre;
+        }
+
+        @Override
+        public int compareTo(StringToScore o) {
+            StringToScore oteher = (StringToScore) o;
+            if (this.score > oteher.score) return 1;
+            return this.name.compareTo(oteher.name);
+        }
+
+        @Override
+        public String toString() {
+            return "StringToScore{" +
+                    "name='" + name + '\'' +
+                    ", score=" + score +
+                    '}';
+        }
+    }
+
+    @Test
+    public void testSort() {
+        List<StringToScore> rates = new ArrayList<>();
+        rates.add(new StringToScore("a1", 100));
+        StringToScore toAdd = new StringToScore("b1", 200);
+        int index = Math.abs(Collections.binarySearch(rates, toAdd)) - 1;
+        rates.add(index, toAdd);
+        System.out.println(rates);
     }
 
 }

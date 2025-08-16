@@ -23,7 +23,6 @@ public class MetricsConsumer {
     public void monitor() {
         scheduler.scheduleAtFixedRate(() -> {
             Thread.currentThread().setDaemon(true);
-
                 try {
                     messageConsumer.getMetric_QueueSize();
                     saveMetrics(messageConsumer.getMetric_QueueSize(), messageConsumer.getMetric_SpeedWrite());

@@ -26,6 +26,7 @@ public class LogAggregatorManager {
         queue = new LinkedBlockingDeque<>();
         MessageConsumer messageConsumer = new MessageConsumer(fileWriterProvider, queue);
         CompletableFuture<Void> future = CompletableFuture.runAsync(messageConsumer);
+        //future.cancel(true);
         healthChecker = new HealthChecker(messageConsumer, maxQueueLength);
         healthChecker.checkHealth();
         metricsConsumer = new MetricsConsumer(messageConsumer);
